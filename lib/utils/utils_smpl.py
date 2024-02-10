@@ -50,7 +50,7 @@ JOINT_NAMES = [
 ]
 
 JOINT_IDS = {JOINT_NAMES[i]: i for i in range(len(JOINT_NAMES))}
-SMPL_MODEL_DIR = 'data/mesh'
+SMPL_MODEL_DIR = 'data/motion3d/MB3D_f243s81/'
 H36M_TO_J17 = [6, 5, 4, 1, 2, 3, 16, 15, 14, 11, 12, 13, 8, 10, 0, 7, 9]
 H36M_TO_J14 = H36M_TO_J17[:14]
 
@@ -59,6 +59,7 @@ class SMPL(_SMPL):
     """ Extension of the official SMPL implementation to support more joints """
 
     def __init__(self, *args, **kwargs):
+        print(args)
         super(SMPL, self).__init__(*args, **kwargs)
         joints = [JOINT_MAP[i] for i in JOINT_NAMES]
         self.smpl_mean_params = osp.join(args[0], 'smpl_mean_params.npz')
@@ -85,4 +86,5 @@ class SMPL(_SMPL):
 
 def get_smpl_faces():
     smpl = SMPL(SMPL_MODEL_DIR, batch_size=1, create_transl=False)
+
     return smpl.faces

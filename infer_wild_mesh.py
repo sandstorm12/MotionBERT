@@ -153,5 +153,7 @@ if opts.ref_3d_motion_path:
     root_cam = ref_pose[:, :1] * scale
     verts_all = verts_all - reg3d_all[:,:1] + root_cam
 
+np.save(osp.join(opts.out_path, 'vertices.npy'), verts_all)
+np.save(osp.join(opts.out_path, 'joints.npy'), reg3d_all)
 render_and_save(verts_all, osp.join(opts.out_path, 'mesh.mp4'), keep_imgs=False, fps=fps_in, draw_face=True)
 
